@@ -1,0 +1,242 @@
+[
+  {
+    "wheel": "FL",
+    "phase_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 3,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 6,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 9,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 12,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 15,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 18,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 21,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 24,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 27,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 30,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "phase_deg": 33,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 3,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 6,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 9,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 12,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 15,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 18,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 21,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 24,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 27,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 30,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "phase_deg": 33,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 3,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 6,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 9,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 12,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 15,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 18,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 21,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 24,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 27,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 30,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "phase_deg": 33,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 3,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 6,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 9,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 12,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 15,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 18,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 21,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 24,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 27,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 30,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "phase_deg": 33,
+    "intersections": []
+  }
+]

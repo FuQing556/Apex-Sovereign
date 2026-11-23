@@ -1,0 +1,121 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9e1887e030e164887d63e67946186f, type: 3}
+  m_Name: DrivingSounds
+  m_EditorClassIdentifier: Assembly-CSharp::Apex.DrivingSounds
+  engineLow: {fileID: 8300000, guid: 8aa760fcf7c7af541aa848368e374191, type: 3}
+  engineHigh: {fileID: 8300000, guid: ea706202df0e2e842bb1be3d4851c1fb, type: 3}
+  engineRedline: {fileID: 8300000, guid: f23980dad3662864cae475984d2de578, type: 3}
+  lowRpm: 1200
+  highRpm: 4200
+  redlineRpm: 7200
+  crossfadeRpm: {x: 2000, y: 3400}
+  redlineCrossfadeRpm: {x: 5000, y: 6600}
+  idleGain: 0.27
+  powerGain: 0.53
+  wind: {fileID: 8300000, guid: 809f3e4d553ec8344bb95b5f817d9289, type: 3}
+  windByKph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 25
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 60
+      value: 0.13
+      inSlope: 0.005
+      outSlope: 0.005
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 100
+      value: 0.4
+      inSlope: 0.006
+      outSlope: 0.006
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 160
+      value: 0.72
+      inSlope: 0.0035
+      outSlope: 0.0035
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 240
+      value: 0.9
+      inSlope: 0.0013
+      outSlope: 0.0013
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 370
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  windGain: 0.6
+  windPitch: {x: 0.85, y: 1.17}
+  windResponseSeconds: 0.24
+  asphalt: {fileID: 8300000, guid: 55a18d02345799f4a8a306efa22178cb, type: 3}
+  kerb: {fileID: 8300000, guid: 611917ae31f0696469f34ef667bf2d36, type: 3}
+  grass: {fileID: 8300000, guid: a207d8ff356e5984b9664745a9895050, type: 3}
+  tyreScrub: {fileID: 8300000, guid: b6ce812196596f74caf356d4f4791b72, type: 3}
+  roadReferenceSpeed: 20
+  audibleSlip: {x: 1.8, y: 13}
+  asphaltGain: 0.19
+  kerbGain: 0.5
+  grassGain: 0.46
+  scrubGain: 0.51
+  shift: {fileID: 8300000, guid: 119e4b0b5f584964dbce7b3f36d06c84, type: 3}
+  impact: {fileID: 8300000, guid: f7cf3dc37dad12e44a615f9fd2b9da65, type: 3}
+  boost: {fileID: 8300000, guid: 9b3455083c7c2964291665db7ee1b21f, type: 3}
+  ready: {fileID: 8300000, guid: a2a827ba21fe07e41a353a4e37a1e271, type: 3}
+  go: {fileID: 8300000, guid: b898844baad13284fa3122ce3264ca20, type: 3}
+  finish: {fileID: 8300000, guid: 839cab9ed979ca542b94feb10e137c3c, type: 3}
+  shiftGain: 0.34
+  impactGain: 0.78
+  boostGain: 0.55
+  signalGain: 0.42
+  impactDeltaSpeed: {x: 0.65, y: 7}
+  impactCooldown: 0.16
+  responseSeconds: 0.065
+  fullVolumeDistance: 9

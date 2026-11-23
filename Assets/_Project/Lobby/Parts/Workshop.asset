@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 843de64b7f36fe04dac0fa539b60c97c, type: 3}
+  m_Name: Workshop
+  m_EditorClassIdentifier: Assembly-CSharp::Apex.WorkshopCatalog
+  differentials:
+  - id: original
+    title: "\u57FA\u51C6\u9650\u6ED1"
+    description: "\u6CBF\u7528\u672C\u8F66\u7684\u9650\u6ED1\u8BBE\u5B9A\u3002\u4E24\u540E\u8F6E\u6709\u8F6C\u901F\u5DEE\u65F6\uFF0C\u5DEE\u901F\u5668\u628A\u90E8\u5206\u626D\u77E9\u4F20\u7ED9\u8F83\u6162\u7684\u4E00\u4FA7\u3002"
+    displayModel: {fileID: 3724794397002340919, guid: bcf1717ee50df89408273f75d47286da, type: 3}
+    rearWheelCover: {fileID: 0}
+    transferFraction: 1
+  - id: club-lsd
+    title: "\u67D4\u6027\u9650\u6ED1"
+    description: "\u9879\u76EE\u8BD5\u5236\u4EF6\u3002\u5DE6\u53F3\u8F6E\u626D\u77E9\u8F6C\u79FB\u91CF\u4E3A\u57FA\u51C6\u7684 50%\uFF0C\u5141\u8BB8\u66F4\u5927\u7684\u8F6E\u901F\u5DEE\u3002"
+    displayModel: {fileID: 8003338193773336042, guid: c133660be81c8fc4e8a73904f1203490, type: 3}
+    rearWheelCover: {fileID: 0}
+    transferFraction: 0.5
+  - id: open
+    title: "\u5F00\u653E\u5F0F\u5DEE\u901F\u5668"
+    description: "\u5DE6\u53F3\u540E\u8F6E\u5404\u5206\u4E00\u534A\u9A71\u52A8\u626D\u77E9\uFF0C\u4ECD\u53EF\u4E0D\u540C\u901F\u8F6C\u52A8\u3002\u5355\u8F6E\u538B\u8349\u65F6\uFF0C\u4F4E\u6293\u5730\u4FA7\u5BB9\u6613\u7A7A\u8F6C\u3002"
+    displayModel: {fileID: 1038709724060832650, guid: b62459542b29f6e4681762cd91d20b16, type: 3}
+    rearWheelCover: {fileID: 0}
+    transferFraction: 0
+  wheels:
+  - id: original
+    title: "\u539F\u8F66\u8F6E\u9762"
+    description: "\u4FDD\u7559\u539F\u6709\u8F6E\u8F90\u4E0E\u5236\u52A8\u76D8\u5916\u89C2\u3002"
+    displayModel: {fileID: 0}
+    rearWheelCover: {fileID: 0}
+    transferFraction: 1
+  - id: vent-disc
+    title: "\u901A\u98CE\u6C14\u52A8\u76D8"
+    description: "\u9879\u76EE\u539F\u521B\u540E\u8F6E\u76D8\u9762\uFF0C\u5341\u4E8C\u7EC4\u5F84\u5411\u5F00\u53E3\u3001\u91D1\u5C5E\u5916\u5708\u548C\u7EA2\u8272\u5B9A\u4F4D\u6807\u8BB0\u3002\u6B64\u4EF6\u4EC5\u6539\u53D8\u5916\u89C2\u3002"
+    displayModel: {fileID: 0}
+    rearWheelCover: {fileID: 3045060899252126613, guid: 49ddf54a34b2d114db2db0e23573d38a, type: 3}
+    transferFraction: 1

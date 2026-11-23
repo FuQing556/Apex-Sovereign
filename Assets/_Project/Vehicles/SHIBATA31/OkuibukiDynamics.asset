@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff24328219548e2a488b976bc162b96, type: 3}
+  m_Name: OkuibukiDynamics
+  m_EditorClassIdentifier: Assembly-CSharp::Apex.CompetitionSetup
+  revision: 9
+  engineInertia: 0.48
+  clutchCapacityNm: 1500
+  launchRpm: 3000
+  clutchEngagementSeconds: 0.18
+  shiftOpenSeconds: 0.09
+  overrunNm: 90
+  limiterRpm: 8200
+  limiterResumeRpm: 8000
+  axleLoadResponseSeconds: 0.055
+  minimumBoostTorqueFraction: 0.60
+  boostFillSeconds: 0.34
+  boostReleaseSeconds: 0.14
+  differentialPreloadNm: 65
+  powerLock: 0.25
+  coastLock: 0.12
+  ackermannFraction: 0.32
+  keyboardAcceleration: {x: 95, y: 10}
+  keyboardPrecisionKph: {x: 40, y: 95}
+  keyboardStartDegreesPerSecond: 4.5
+  keyboardMaxDegreesPerSecond: 165
+  keyboardCatchDegrees: 18
+  keyboardCatchYawRate: 30
+  keyboardCenterSeconds: 0.10
+  keyboardCenterDegreesPerSecond: 4
+  recoveryNeutralSlip: 21
+  recoveryCounterSlip: 5
+  recoveryYawRate: 12
+  recoveryCounterGain: 0.68
+  recoveryYawSeconds: 0.16
+  recoveryFollowSeconds: 1.1
+  recoveryResponseSeconds: 0.09
+  recoveryHoldSeconds: 0.52
+  pedalForce: 450
+  handForce: 250
+  pedalRatio: 5
+  handLeverRatio: 6
+  frontPushrodFraction: 0.54
+  frontMasterMm: 19.05
+  rearMasterMm: 19.05
+  handMasterMm: 15.875
+  frontPistonArea: 3100
+  rearPistonArea: 2200
+  handPistonArea: 2050
+  frontDiscRadius: 0.145
+  rearDiscRadius: 0.132
+  padFriction: 0.41
+  serviceApplySeconds: 0.1
+  serviceReleaseSeconds: 0.07
+  ambientC: 22
+  fadeStartC: 500
+  fadeEndC: 750
+  hotPadFraction: 0.72
+  discHeatCapacity: 4200
+  discCoolingSeconds: 180
+  frontTyre:
+    longitudinal: 1.45
+    lateral: 1.32
+    peakSideSlip: 0.20
+    slidingSideSlip: 0.50
+    slidingFraction: 0.90
+    coldGaugeBar: 2.05
+  rearTyre:
+    longitudinal: 1.48
+    lateral: 1.29
+    peakSideSlip: 0.22
+    slidingSideSlip: 0.55
+    slidingFraction: 0.92
+    coldGaugeBar: 1.85
+  loadSensitivity: 0.12
+  treadHeatCapacity: 4300
+  gasHeatCapacity: 96
+  carcassHeatCapacity: 14000
+  carcassCoolingSeconds: 160
+  treadCarcassConductance: 165
+  carcassGasConductance: 4
+  treadAirConductance: 30
+  treadRoadConductance: 90
+  treadAirPerSpeed: 3
+  roadC: 22
+  rollingFadeSpeed: 0.5
+  rollingLossCoefficient: 0.012
+  treadGripWeight: 0.7
+  heatToTyre: 0.5
+  warmTyreC: 60
+  hotTyreC: 95
+  overheatC: 140
+  coldGrip: 0.96
+  overheatedGrip: 0.78
+  frontRollStiffness: 9500
+  rearRollStiffness: 6000
+  reboundDamper: 4400
+  airDensity: 1.225
+  dragArea: 0.78
+  sideDragArea: 2.4
+  downforceArea: 0.48
+  aeroCenter: {x: 0, y: 0.42, z: -0.26}

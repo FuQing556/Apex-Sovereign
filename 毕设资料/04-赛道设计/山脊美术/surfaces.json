@@ -1,0 +1,204 @@
+{
+  "surfaces": [
+    {
+      "name": "Meadow",
+      "r": 0.155,
+      "g": 0.205,
+      "b": 0.098,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Heather",
+      "r": 0.21,
+      "g": 0.229,
+      "b": 0.126,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Shale",
+      "r": 0.205,
+      "g": 0.211,
+      "b": 0.18,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Distant ridge",
+      "r": 0.12,
+      "g": 0.18,
+      "b": 0.188,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Fir shade",
+      "r": 0.036,
+      "g": 0.083,
+      "b": 0.055,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Spruce",
+      "r": 0.065,
+      "g": 0.132,
+      "b": 0.078,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Fir tips",
+      "r": 0.089,
+      "g": 0.159,
+      "b": 0.087,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Autumn leaf",
+      "r": 0.261,
+      "g": 0.243,
+      "b": 0.11,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Bark",
+      "r": 0.131,
+      "g": 0.087,
+      "b": 0.052,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Creek water",
+      "r": 0.084,
+      "g": 0.257,
+      "b": 0.261,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.75,
+      "emission": 0
+    },
+    {
+      "name": "Ripple",
+      "r": 0.39,
+      "g": 0.57,
+      "b": 0.53,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Galvanized",
+      "r": 0.388,
+      "g": 0.415,
+      "b": 0.409,
+      "a": 1,
+      "metal": 0.55,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Pit charcoal",
+      "r": 0.079,
+      "g": 0.092,
+      "b": 0.098,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Pit ivory",
+      "r": 0.712,
+      "g": 0.685,
+      "b": 0.57,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Safety orange",
+      "r": 0.83,
+      "g": 0.186,
+      "b": 0.039,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Timing glass",
+      "r": 0.1,
+      "g": 0.2,
+      "b": 0.23,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.75,
+      "emission": 0
+    },
+    {
+      "name": "Sign ink",
+      "r": 0.028,
+      "g": 0.044,
+      "b": 0.047,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Asphalt apron",
+      "r": 0.12,
+      "g": 0.13,
+      "b": 0.134,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Cedar boughs",
+      "r": 0.84,
+      "g": 0.89,
+      "b": 0.83,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    },
+    {
+      "name": "Birch canopy",
+      "r": 0.9,
+      "g": 0.89,
+      "b": 0.83,
+      "a": 1,
+      "metal": 0.08,
+      "gloss": 0.24,
+      "emission": 0
+    }
+  ]
+}

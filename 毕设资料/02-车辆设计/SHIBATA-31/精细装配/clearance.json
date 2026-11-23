@@ -1,0 +1,482 @@
+[
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -120,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": -60,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 0,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 60,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FL",
+    "bump_mm": 120,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -120,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": -60,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 0,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 60,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": -62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": -45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": -25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": 25,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": 45,
+    "intersections": []
+  },
+  {
+    "wheel": "FR",
+    "bump_mm": 120,
+    "steer_deg": 62.5,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "bump_mm": -120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "bump_mm": -60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "bump_mm": 0,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "bump_mm": 60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RL",
+    "bump_mm": 120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "bump_mm": -120,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "bump_mm": -60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "bump_mm": 0,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "bump_mm": 60,
+    "steer_deg": 0,
+    "intersections": []
+  },
+  {
+    "wheel": "RR",
+    "bump_mm": 120,
+    "steer_deg": 0,
+    "intersections": []
+  }
+]

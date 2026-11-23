@@ -1,0 +1,45 @@
+# Unity generates these directories locally.
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/Assets/_Recovery/
+/Assets/_Recovery.meta
+/GhostSaves/
+
+# IDE, Python and thumbnail caches
+/.vs/
+/.idea/
+/.vsconfig
+/*.csproj
+/*.sln
+/*.slnx
+__pycache__/
+*.pyc
+.thumbnails/
+*.blend1
+
+# Local handover packages, research copies and private correspondence.
+/*.zip
+/项目交接.md
+/毕设资料/*
+!/毕设资料/01-前期调研/
+/毕设资料/01-前期调研/*
+!/毕设资料/01-前期调研/漂移与轮胎动力学.bib
+!/毕设资料/02-车辆设计/
+/毕设资料/02-车辆设计/*
+!/毕设资料/02-车辆设计/SHIBATA-31/
+/毕设资料/02-车辆设计/SHIBATA-31/*
+!/毕设资料/02-车辆设计/SHIBATA-31/*.py
+!/毕设资料/02-车辆设计/SHIBATA-31/*.blend
+!/毕设资料/02-车辆设计/SHIBATA-31/装配基准.svg
+!/毕设资料/02-车辆设计/SHIBATA-31/Ridge换向二挡遥测摘录.csv
+!/毕设资料/02-车辆设计/SHIBATA-31/精细装配/
+!/毕设资料/04-赛道设计/
+/毕设资料/04-赛道设计/*
+!/毕设资料/04-赛道设计/山脊美术/

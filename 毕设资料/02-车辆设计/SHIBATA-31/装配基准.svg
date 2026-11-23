@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 650">
+<rect width="1100" height="650" fill="#101e2a"/><g font-family="sans-serif" fill="#f1f4f1"><text x="50" y="52" font-size="29">SHIBATA · 31  /  OKUIBUKI 2024</text><text x="51" y="84" fill="#9db4bd">PACKAGING DRAWING  01    |    nominal dimensions in mm    |    front at right</text></g>
+<g transform="translate(548 346) scale(.215 -.215)" stroke="#adc4ce" stroke-width="8" fill="none">
+<path d="M-2132 210 L-2090 680 -1480 805 -740 1180 -300 1280 95 1260 750 830 1530 745 2000 590 2132 370 2110 150 1700 145 Q1720 753 1287 734 Q863 745 875 145 L-875 145 Q-846 805 -1287 795 Q-1735 811 -1710 155 Z" fill="#38434c"/>
+<path d="M-2070 820 L-2110 1110 -1730 1110 M-900 915 L-560 1180 60 1205 660 846Z M730 830 L1880 663" />
+<g stroke="#ff8d6a"><circle cx="1287.5" cy="321.5" r="321.5"/><circle cx="1287.5" cy="321.5" r="228.6"/><circle cx="-1287.5" cy="354" r="354"/><circle cx="-1287.5" cy="354" r="254"/></g>
+<path d="M-1287.5 0 V-220 M1287.5 0 V-220 M-1287.5 -165 H1287.5 M-2200 0 H2200" stroke="#58cbbb"/></g>
+<g font-family="sans-serif" fill="white" font-size="18"><text x="427" y="414">2575  donor wheelbase</text>
+<text x="57" y="482" fill="#ff9d85">REAR / 285/35ZR20</text><text x="57" y="513">R23 catalogue OD 708 · rim seat 508 · ET +12</text>
+<text x="586" y="482" fill="#ff9d85">FRONT / 265/35R18</text><text x="586" y="513">R23 catalogue OD 643 · rim seat 457.2 · ET +25</text>
+<text x="57" y="567" fill="#67d4c6">DATUM</text><text x="157" y="567">Axle midpoint · ground plane · static unloaded tyre envelope</text>
+<text x="57" y="610" fill="#a6bbc2">Shell, arches, stance and aero are provisional. Race hardpoints require measurement.</text></g></svg>

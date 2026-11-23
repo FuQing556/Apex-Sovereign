@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfec24789d785145908b9948bd04cdf, type: 3}
+  m_Name: Okuibuki
+  m_EditorClassIdentifier: Assembly-CSharp::Apex.CarSpec
+  displayName: 柴田 31 号 · GR86
+  competition: {fileID: 11400000, guid: 85a6a32663574439a259aa1d570b5265, type: 2}
+  body: {fileID: 5803167219636923076, guid: 91158de52b5bd3849b947f454c362b58, type: 3}
+  mass: 1350
+  wheelbase: 2.575
+  track: 1.67
+  radius: 0.3215
+  centerHeight: 0.32
+  rearRadius: 0.354
+  visualTyreWidths: {x: 0.265, y: 0.285}
+  frontWeight: 0.52
+  steeringBySpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 58
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 50
+      value: 58
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  steerRate: 2.2
+  returnRate: 3.4
+  countersteerRate: 4.5
+  directionThreshold: 0.18
+  reverseLimit: 9
+  pedalRise: 3
+  pedalRelease: 5
+  coastTorque: 36
+  longitudinalGrip: 1.45
+  lateralGrip: 1.28
+  gripSlipAllowance: 7
+  driftSlipAllowance: 14
+  slipSteerGain: 0
+  yawPreview: 0.22
+  slidingGripFraction: 0.92
+  roadSpeedAutomaticShifts: 1
+  enginePowerMap: {fileID: 11400000, guid: ce831c5725d04464aba1ee262352c03a, type: 2}
+  engineNm:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1000
+      value: 240
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 2500
+      value: 372
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 4500
+      value: 445
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 6500
+      value: 350
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gears:
+  - 3.2
+  - 2.05
+  - 1.5
+  - 1.17
+  - 0.95
+  - 0.79
+  poweredTopKph: 370
+  limiterBandKph: 12
+  finalDrive: 3.9
+  efficiency: 0.9
+  upshift: 7750
+  downshift: 2200
+  idle: 1000
+  differentialGain: 1
+  differentialLimit: 130
+  handbrakeCutsDrive: 0
+  brakeNm: 4400
+  handbrakeNm: 2500
+  handRamp: 20
+  boostGain: 0
+  boostRamp: 4
+  poweredDrift: 0
+  driftBrakePulse: 0.18
+  driftRearGrip: 0.92
+  driftWheelSlipTarget: 0.22
+  driftWheelSlipBand: 0.45
+  driftGripRecoveryAngle: 22
+  driftBlendRate: 4
+  driftMinSpeed: 7
+  driftEntryAngle: 7.5
+  driftExitAngle: 6
+  driftSpinAngle: 50
+  driftMinYaw: 8
+  driftMinSeconds: 0.24
+  driftFullSeconds: 1.1
+  driftExitWindow: 1.1
+  driftBoostMin: 0.5
+  driftBoostMax: 1.1
+  exhaustTip: {x: 0.6, y: 0.47, z: -2.08}
+  flameLength: 1.05
+  flameWidth: 0.24
+  brakeFront: 0.65
+  frontSpring: 32000
+  rearSpring: 30000
+  damper: 3600
+  travel: 0.24
+  wheelMass: 35
+  tireStiffness: 200000
+  maxFlatten: 0.04
+  cameraOffset: {x: 0, y: 3.4, z: -7}
+  lookAhead: 4
+  cameraResponse: 14

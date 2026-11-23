@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>山脊 · 双圈漂移计算</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#141b20;color:#ebf0eb;font:15px system-ui,"Microsoft YaHei",sans-serif}main{max-width:1160px;margin:auto;padding:25px}h1{font-size:clamp(22px,4vw,34px);margin:0}header,.controls,.stats{display:flex;align-items:center;gap:16px;flex-wrap:wrap}header{justify-content:space-between}small,p{color:#acc2ca}canvas{width:100%;display:block;background:#192229;border-radius:8px}section{display:grid;grid-template-columns:1.12fr 1fr;gap:16px}figure{margin:0}figcaption{margin:10px 0;color:#a8c1cb}.controls,.stats{padding:15px 0;font-variant-numeric:tabular-nums}button,select{font:inherit;border:1px solid #516771;color:#f7f5ec;background:#23323b;border-radius:5px;padding:6px 10px}button{cursor:pointer}input{accent-color:#ffa767;flex:1;min-width:120px}.stats b{font-size:22px;color:white}.stats span{display:grid;gap:2px;color:#a6bac1;font-size:13px}@media(max-width:730px){main{padding:12px}section{grid-template-columns:1fr}.stats{gap:9px}}
+</style>
+<main><header><h1>山脊 · 双圈漂移幽灵</h1><small>柴田 31 号 ／ 离线计算预测</small></header>
+<div class="controls"><button id="play">播放</button><select id="rate" aria-label="播放倍速"><option value=".25">¼ 倍</option><option value=".5">½ 倍</option><option selected value="1">原速</option><option value="2">2 倍</option></select><select id="corner" aria-label="跳至弯前"></select><input id="seek" type="range" min="0" step=".02" value="0" aria-label="时间"><output id="clock"></output></div>
+<section><figure><canvas id="overview" width="620" height="500"></canvas><figcaption>山脊全图 · 橙色为计算路线</figcaption></figure><figure><canvas id="detail" width="620" height="500"></canvas><figcaption>局部放大 · 白色指车头，青色箭头指速度方向</figcaption></figure></section>
+<div class="stats" id="stats"></div><p>弯心时刻以项目弯区里程为准。按键来自键盘响应反算。轨迹和车速来自连续车辆模型。</p></main>
+<script>
+const plan=__PLAN_DATA__,frames=plan.frames,edges=plan.edges,end=frames.at(-1)[0];
+const by=id=>document.getElementById(id),seek=by("seek"),corner=by("corner");let t=0,playing=false,last=null;
+seek.max=end;corner.add(new Option("跳至弯前…",""));plan.corners.forEach(c=>corner.add(new Option("第 "+c[0]+" 圈 · "+c[1]+" 弯"+c[2],Math.max(0,c[4]-3.2))));
+const labels=["速度 km/h","按键","前轮 °","侧滑 °","横摆 °/s","车身至路边 m"];labels.forEach(l=>{let e=document.createElement("span");e.textContent=l;e.appendChild(document.createElement("b"));by("stats").appendChild(e)});
+const xs=edges.flat().map(p=>p[0]),zs=edges.flat().map(p=>p[1]),cx=(Math.max(...xs)+Math.min(...xs))/2,cz=(Math.max(...zs)+Math.min(...zs))/2,span=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...zs)-Math.min(...zs));
+function draw(){
+ let low=0,hi=frames.length-1;while(low+1<hi){let m=(low+hi)>>1;if(frames[m][0]<=t)low=m;else hi=m}let a=frames[low],b=frames[hi],w=Math.min(1,(t-a[0])/(b[0]-a[0])),f=a.map((x,j)=>j===8?(w<1?x:b[j]):x+(b[j]-x)*w);seek.value=t;by("clock").value=t.toFixed(2)+" / "+end.toFixed(2)+" s";
+ let keys=[[1,"W"],[2,"A"],[4,"D"],[8,"S"]].filter(z=>f[8]&z[0]).map(z=>z[1]).join("+")||"松开";
+ [f[5].toFixed(1),keys,f[7].toFixed(1),f[6].toFixed(1),f[11].toFixed(1),f[10].toFixed(2)].forEach((v,j)=>by("stats").children[j].lastChild.textContent=v);
+ [false,true].forEach(zoom=>{let canvas=by(zoom?"detail":"overview"),c=canvas.getContext("2d"),sc=zoom?5.4:450/span,x0=zoom?f[1]:cx,z0=zoom?f[2]:cz;
+ const X=x=>310+(x-x0)*sc,Z=z=>250-(z-z0)*sc;c.clearRect(0,0,620,500);
+ const path=(points,close=false)=>{c.beginPath();points.forEach(([x,z],i)=>i?c.lineTo(X(x),Z(z)):c.moveTo(X(x),Z(z)));if(close)c.closePath()};
+ c.fillStyle="#303b40";c.beginPath();for(let edge of edges){edge.forEach(([x,z],i)=>i?c.lineTo(X(x),Z(z)):c.moveTo(X(x),Z(z)));c.closePath()}c.fill("evenodd");
+ c.strokeStyle="#617375";c.lineWidth=1;edges.forEach(e=>{path(e,true);c.stroke()});
+ let range=zoom?frames.slice(Math.max(0,low-46),Math.min(frames.length,low+55)):frames.filter((_,i)=>i%5===0);
+ c.strokeStyle="#dc9359";c.lineWidth=zoom?2:1.2;path(range.map(q=>[q[1],q[2]]));c.stroke();
+ c.save();c.translate(X(f[1]),Z(f[2]));c.rotate(f[3]);c.fillStyle="#f3f3e8";const size=zoom?sc:2;c.fillRect(-.89*size,-2.09*size,1.78*size,4.18*size);
+ c.fillStyle="#5485a0";c.fillRect(-.7*size,-1.1*size,1.4*size,.75*size);c.restore();
+ if(zoom){c.save();c.translate(310,250);c.rotate(f[4]);c.strokeStyle="#5ed6cf";c.fillStyle=c.strokeStyle;c.lineWidth=2;c.beginPath();c.moveTo(0,0);c.lineTo(0,-54);c.stroke();c.beginPath();c.moveTo(0,-60);c.lineTo(-4,-51);c.lineTo(4,-51);c.fill();c.restore()}
+ });}
+function tick(now){if(playing&&last!==null){t=Math.min(end,t+(now-last)/1000*Number(by("rate").value));if(t>=end){playing=false;by("play").textContent="重播"}}last=now;draw();if(playing)requestAnimationFrame(tick)}
+by("play").onclick=()=>{playing=!playing;last=null;if(t>=end)t=0;by("play").textContent=playing?"暂停":"播放";if(playing)requestAnimationFrame(tick)};
+seek.oninput=()=>{t=+seek.value;draw()};corner.onchange=()=>{if(corner.value!==""){t=+corner.value;draw()}};draw();
+</script></html>
