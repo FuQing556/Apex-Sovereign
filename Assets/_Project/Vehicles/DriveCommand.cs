@@ -52,6 +52,12 @@ public sealed class LocalDriver : IDriver {
             padX=p?.leftStick.x.ReadValue()??0,padForward=p?.rightTrigger.ReadValue()??0,padBack=p?.leftTrigger.ReadValue()??0,padHand=p?.buttonEast.isPressed==true};
     }
     public void Release(){Input=new DriverInputFrame{frame=Time.frameCount,keyboardId=-1};pendingGear=pendingEdges=CapturedGearEdges=0;pendingAutomatic=false;}
+#if UNITY_EDITOR
+    internal void CaptureDemonstrationKeyboard(DriverInputFrame keys){
+        Input=keys;
+        pendingGear=pendingEdges=0;pendingAutomatic=false;
+    }
+#endif
     public DriveCommand Read(){
         CapturedGearEdges=pendingEdges;pendingEdges=0;
         var f=Input;

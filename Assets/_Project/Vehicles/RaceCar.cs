@@ -8,7 +8,8 @@ public class RaceCar : MonoBehaviour {
     float DifferentialFraction=>Differential?.transferFraction??1f;
     public void FitParts(WorkshopCatalog.Part differential,WorkshopCatalog.Part rearWheels){
         Differential=differential;RearWheels=rearWheels;
-        if(TryGetComponent<WorkshopMounts>(out var mounts))mounts.Fit(rearWheels);
+        var mounts=GetComponentInChildren<WorkshopMounts>();
+        if(mounts && rearWheels!=null)mounts.Fit(rearWheels);
     }
     public WheelCollider[] wheels;
     public Transform[] tires;
@@ -18,8 +19,10 @@ public class RaceCar : MonoBehaviour {
     public Rigidbody Chassis {get;private set;}
     public float Speed=>Chassis.linearVelocity.magnitude;
     public int Gear {get;private set;}
+    int DrivenLeft=>spec.frontWheelDrive?0:2;
+    float AxleRpm=>(wheels[DrivenLeft].rpm+wheels[DrivenLeft+1].rpm)*.5f;
     public float EngineRpm=>spec.competition?driveline.EngineRpm:
-        Mathf.Max(spec.idle,Mathf.Abs((wheels[2].rpm+wheels[3].rpm)*.5f)*spec.finalDrive*spec.gears[Gear]);
+        Mathf.Max(spec.idle,Mathf.Abs(AxleRpm)*spec.finalDrive*spec.gears[Gear]);
     public static float ContactSlipSpeed(WheelCollider wheel,WheelHit hit,Vector3 velocity){
         float spin=wheel.rpm*(2*Mathf.PI/60)*wheel.radius;
         float longitudinal=Vector3.Dot(velocity,hit.forwardDir)-spin;
@@ -52,18 +55,37 @@ public class RaceCar : MonoBehaviour {
         }
     }
     public int VehicleContacts {get;private set;}
+    public event System.Action<RaceCar> CarContactImpulse;
+    public Vector3 LastCarImpulse {get;private set;}
+    public Vector3 LastCarContactPoint {get;private set;}
+    public float LastCarClosingSpeed {get;private set;}
+    public RaceCar LastCarContact {get;private set;}
+    public int CarImpulseSample {get;private set;}
+    void ObserveCarContact(Collision hit,RaceCar other){
+        if(hit.contactCount==0)return;
+        var point=hit.GetContact(0);
+        LastCarImpulse=hit.impulse;LastCarContactPoint=point.point;
+        LastCarClosingSpeed=Mathf.Abs(Vector3.Dot(hit.relativeVelocity,point.normal));
+        LastCarContact=other;CarImpulseSample++;CarContactImpulse?.Invoke(this);
+    }
     void OnCollisionEnter(Collision hit){
         impact=true;
-        if(hit.rigidbody && hit.rigidbody.TryGetComponent<RaceCar>(out _))VehicleContacts++;
+        if(hit.rigidbody && hit.rigidbody.TryGetComponent<RaceCar>(out var other)){
+            VehicleContacts++;ObserveCarContact(hit,other);
+        }
     }
-    void OnCollisionStay(Collision hit){impact=true;}
+    void OnCollisionStay(Collision hit){
+        impact=true;
+        if(hit.rigidbody && hit.rigidbody.TryGetComponent<RaceCar>(out var other))ObserveCarContact(hit,other);
+    }
     public float ForwardSpeed=>Vector3.Dot(Chassis.linearVelocity,transform.forward);
     public bool Reversing {get;private set;}
     public int GroundedCount {get;private set;}
     readonly Collider[] groundColliders=new Collider[4];
     readonly TyreSurface[] surfaces=new TyreSurface[4];
-    public RoadCover WheelCover(int i)=>!groundColliders[i]?RoadCover.Air:surfaces[i]?surfaces[i].cover:RoadCover.Asphalt;
-    public Vector2 WheelGrip(int i)=>!groundColliders[i]?Vector2.zero:surfaces[i]?surfaces[i].Grip:Vector2.one;
+    readonly RoadCover[] contactCover=new RoadCover[4];
+    public RoadCover WheelCover(int i)=>!groundColliders[i]?RoadCover.Air:contactCover[i];
+    public Vector2 WheelGrip(int i)=>!groundColliders[i]?Vector2.zero:surfaces[i]?surfaces[i].GripFor(contactCover[i]):Vector2.one;
     public DriveCommand AppliedCommand {get;private set;}
     public DriverInputFrame AppliedInput {get;private set;}
     void Update(){if(Driver is LocalDriver local)local.Capture();}
@@ -168,11 +190,12 @@ public class RaceCar : MonoBehaviour {
         AppliedInput=Driver is LocalDriver local?local.Input:default;
         AppliedCommand=c;
         var setup=spec.competition;
-        float axleRpm=(wheels[2].rpm+wheels[3].rpm)*.5f;
+        int left=DrivenLeft;
+        float axleRpm=AxleRpm;
         float shiftWheelRpm=Mathf.Abs(axleRpm);
         if(spec.roadSpeedAutomaticShifts){
             float roadSpeed=Vector3.ProjectOnPlane(Chassis.linearVelocity,transform.up).magnitude;
-            shiftWheelRpm=roadSpeed*60/(2*Mathf.PI*wheels[2].radius);
+            shiftWheelRpm=roadSpeed*60/(2*Mathf.PI*wheels[left].radius);
         }
         float shiftRpm=shiftWheelRpm*spec.finalDrive*spec.gears[Gear];
         int oldGear=Gear;
@@ -203,6 +226,7 @@ public class RaceCar : MonoBehaviour {
                 surfaces[i]=collider?collider.GetComponentInParent<TyreSurface>():null;
             }
             if(!touching)continue;
+            contactCover[i]=surfaces[i]?surfaces[i].CoverAt(hit.point,hit.normal):RoadCover.Asphalt;
             normal+=hit.normal;GroundedCount++;if(i>=2)rearContact=true;
         }
         normal=normal.sqrMagnitude>0?normal.normalized:transform.up;
@@ -269,9 +293,9 @@ public class RaceCar : MonoBehaviour {
         float ratio=reverse?spec.gears[0]:spec.gears[Gear];
         if(setup){
             float signedRatio=(reverse?-1:1)*ratio*spec.finalDrive;
-            float inertia=spec.wheelMass*wheels[2].radius*wheels[2].radius;
+            float inertia=spec.wheelMass*wheels[left].radius*wheels[left].radius;
             float reactionLimit=0;
-            for(int i=2;i<4;i++){
+            for(int i=left;i<left+2;i++){
                 var wheel=wheels[i];
                 reactionLimit+=wheel.brakeTorque;
                 if(wheel.GetGroundHit(out var hit))reactionLimit+=Mathf.Max(0,hit.force)*wheel.forwardFriction.stiffness*wheel.radius;
@@ -279,10 +303,10 @@ public class RaceCar : MonoBehaviour {
             float torqueAtAxle=driveline.Step(spec,dt,pedal,c.clutch,axleRpm,signedRatio,inertia,reactionLimit,shifted,EnabledDrive);
             float limit=setup.differentialPreloadNm+Mathf.Abs(torqueAtAxle)*
                 (driveline.ClutchNm>=0?setup.powerLock:setup.coastLock);
-            float deltaSpeed=(wheels[2].rpm-wheels[3].rpm)*Mathf.PI/30;
+            float deltaSpeed=(wheels[left].rpm-wheels[left+1].rpm)*Mathf.PI/30;
             float transfer=DifferentialFraction*Mathf.Clamp(deltaSpeed*inertia/(4*dt),-limit,limit);
-            wheels[2].motorTorque=.5f*torqueAtAxle-transfer;
-            wheels[3].motorTorque=.5f*torqueAtAxle+transfer;
+            wheels[left].motorTorque=.5f*torqueAtAxle-transfer;
+            wheels[left+1].motorTorque=.5f*torqueAtAxle+transfer;
             competitionChassis.Step(c,hand,dt);
             return;
         }
@@ -292,11 +316,10 @@ public class RaceCar : MonoBehaviour {
         float coupling=spec.handbrakeCutsDrive?1-hand:1;
         torque*= (reverse?-1:1)*(pedal+boost*spec.boostGain)*coupling;
         if(!reverse)torque*=Mathf.Clamp01((spec.poweredTopKph-ForwardSpeed*3.6f)/Mathf.Max(.1f,spec.limiterBandKph));
-        float bias=DifferentialFraction*Mathf.Clamp((wheels[2].rpm-wheels[3].rpm)*spec.differentialGain,-spec.differentialLimit,spec.differentialLimit);
+        float bias=DifferentialFraction*Mathf.Clamp((wheels[left].rpm-wheels[left+1].rpm)*spec.differentialGain,-spec.differentialLimit,spec.differentialLimit);
         // Engine braking follows the same driveline coupling as propulsion.
         float coastBrake=c.throttle<=0 && pedal<=.01f && boost==0 && !poweredSlide
             ? spec.coastTorque*coupling : 0;
-        float rearBrake=hand*spec.handbrakeNm+coastBrake;
         for(int i=0;i<4;i++){
             float drive=torque*.5f;
             if(i>=2 && poweredSlide && releaseBrake && wheels[i].GetGroundHit(out var contact)){
@@ -307,8 +330,10 @@ public class RaceCar : MonoBehaviour {
                 float slip=(treadSpeed-roadSpeed)/Mathf.Max(spec.driftMinSpeed,Mathf.Abs(roadSpeed));
                 drive*=1-Mathf.Clamp01((slip-spec.driftWheelSlipTarget)/spec.driftWheelSlipBand);
             }
-            wheels[i].motorTorque=i<2?0:drive+(i==2?-bias:bias);
-            wheels[i].brakeTorque=c.brake*spec.brakeNm*.5f*(i<2?spec.brakeFront:1-spec.brakeFront)+(i>=2?rearBrake:0);
+            bool driven=i==left || i==left+1;
+            wheels[i].motorTorque=driven?drive+(i==left?-bias:bias):0;
+            wheels[i].brakeTorque=c.brake*spec.brakeNm*.5f*(i<2?spec.brakeFront:1-spec.brakeFront)
+                +(i>=2?hand*spec.handbrakeNm:0)+(driven?coastBrake:0);
         }
     }
     void LateUpdate(){

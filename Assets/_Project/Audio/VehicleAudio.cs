@@ -92,7 +92,16 @@ namespace Apex {
             if(clip)actions.PlayOneShot(clip,gain);
         }
         void OnCollisionEnter(Collision hit){
+            SoundImpact(hit);
+        }
+        void OnCollisionStay(Collision hit){
+            if(hit.rigidbody && hit.rigidbody.TryGetComponent<RaceCar>(out _))SoundImpact(hit);
+        }
+        void SoundImpact(Collision hit){
             if(!bank || Time.fixedTime<nextImpact)return;
+            // A pair of car bodies emits a single spatial impact sound.
+            if(hit.rigidbody && hit.rigidbody.TryGetComponent<RaceCar>(out var other) &&
+               car.GetEntityId().CompareTo(other.GetEntityId())>0 && other.TryGetComponent<VehicleAudio>(out _))return;
             float deltaSpeed=hit.impulse.magnitude/car.Chassis.mass;
             float strength=Mathf.InverseLerp(bank.impactDeltaSpeed.x,bank.impactDeltaSpeed.y,deltaSpeed);
             if(strength<=0)return;

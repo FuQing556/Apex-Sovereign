@@ -11,8 +11,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfec24789d785145908b9948bd04cdf, type: 3}
   m_Name: Okuibuki
+  factoryPaint: {fileID: 2100000, guid: b9fc998ccfb09594eb5fbf07498829de, type: 2}
   m_EditorClassIdentifier: Assembly-CSharp::Apex.CarSpec
   displayName: 柴田 31 号 · GR86
+  factoryRaceNumber: 31
   competition: {fileID: 11400000, guid: 85a6a32663574439a259aa1d570b5265, type: 2}
   body: {fileID: 5803167219636923076, guid: 91158de52b5bd3849b947f454c362b58, type: 3}
   mass: 1350

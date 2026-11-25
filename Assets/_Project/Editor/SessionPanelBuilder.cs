@@ -136,6 +136,19 @@ public static class SessionPanelBuilder {
         card.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,334);
         p.cycleVolume=Button(card,"音效音量",TL,20,-200,314,44,"音效音量　75%",false,out p.volumeLabel);
     }
+    public static void AddMapViewSetting(SessionPanel p){
+        if(p.toggleMapView)return;
+        font=p.garageKeys.font;
+        var card=(RectTransform)p.backFromSettings.transform.parent;
+        card.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,486);
+        p.toggleMapView=Button(card,"小地图视角",TL,20,-360,314,44,"小地图　跟车 · 车头向上",false,out p.mapViewLabel);
+        p.mapOrientation=p.mapTitle.transform.parent.Find("方位").GetComponent<Text>();
+        var orientation=p.mapOrientation.rectTransform;
+        orientation.anchoredPosition=new Vector2(163,-8);
+        orientation.sizeDelta=new Vector2(60,25);
+        p.mapOrientation.text="车头向上";
+        p.mapTitle.rectTransform.sizeDelta=new Vector2(148,28);
+    }
     [MenuItem("Apex/Setup/Install race replay menu")]
     static void InstallReplayControls(){
         var root=PrefabUtility.LoadPrefabContents(Path);
@@ -233,7 +246,7 @@ public static class SessionPanelBuilder {
         p.installPart=Button(card,"装车",BR,-20,22,204,50,"安装到本车",true,out p.installLabel);
         var settingsCard=(RectTransform)p.backFromSettings.transform.parent;
         settingsCard.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,390);
-        p.blurToggle=Button(settingsCard,"高速动态模糊",TL,20,-254,314,44,"高速动态模糊",false,out p.blurLabel);
+        p.blurToggle=Button(settingsCard,"高速模糊与气流",TL,20,-254,314,44,"广角、动态模糊与气流",false,out p.blurLabel);
         screen.gameObject.SetActive(false);
     }
     static void Driving(SessionPanel p,RectTransform screen){
@@ -297,6 +310,7 @@ public static class SessionPanelBuilder {
             var p=r.gameObject.AddComponent<SessionPanel>();
             p.garage=Group("车库",r).gameObject;Garage(p,(RectTransform)p.garage.transform);AddDrivingSettings(p);AddWorkshop(p);AddRecoverySetting(p);
             p.hud=Group("驾驶",r).gameObject;Driving(p,(RectTransform)p.hud.transform);
+            AddMapViewSetting(p);
             p.results=Group("完赛",r).gameObject;Results(p,(RectTransform)p.results.transform);AddReplayControls(p);
             var load=Group("载入",r);p.loading=load.gameObject;Paint(load,ink);
             Type(Box("状态",load,C,0,0,340,80),"正在载入场地…",28,white,TextAnchor.MiddleCenter);

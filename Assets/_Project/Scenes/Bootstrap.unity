@@ -393,39 +393,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Apex.RaceSession
   lobbyScene: Lobby
-  trackScene: Circuit
+  trackScene: Ridge
   tracks:
   - title: "\u5C71\u810A\u5927\u5956\u8D5B\u9053"
     scene: Ridge
-    freeDrive: 0
     layout: {fileID: 11400000, guid: 23973ab3570041043b013abb9782cf13, type: 2}
-  - title: "\u53F0\u5730\u56DE\u5934\u5F2F"
-    scene: Mesa
-    freeDrive: 0
-    layout: {fileID: 11400000, guid: 4b46069e107fe5c47a7fcc8c43c64c84, type: 2}
-  - title: "\u94B4\u84DD\u692D\u5706\u8D5B\u9053"
-    scene: Circuit
-    freeDrive: 0
+    routeRevision: 0
+  - title: "\u6EE8\u6D77\u6E7E \xB7 \u9713\u8679\u591C\u8D5B"
+    scene: MarinaBay
     layout: {fileID: 0}
-  - title: "\u5F00\u653E\u8BD5\u8F66\u573A"
-    scene: TestPad
-    freeDrive: 1
-    layout: {fileID: 0}
-  - title: "\u9A7E\u9A76\u8BAD\u7EC3\u573A"
-    scene: DrivingSchool
-    freeDrive: 1
-    layout: {fileID: 0}
-  defaultTrackTitle: "\u94B4\u84DD\u692D\u5706\u8D5B\u9053"
+    routeRevision: 2
+  gridSettings:
+    slotSpacing: 4
+    finishWindow: 30
+    firstParkingStation: 65
+    parkingInterval: 9
+    parkingOffset: 8
+    cameraImpactRange: {x: 0.65, y: 5}
+    cameraImpactTravel: 0.23
+    cameraImpactDecay: 0.16
+    lineWidth: 3.5
+    lateralAcceleration: 9.3
+    brakingAcceleration: 7.4
+    topSpeed: 42
+    lookBase: 6.5
+    lookSeconds: 0.5
+    trafficClearance: 3.1
+    driftLead: 26
+    driftAngle: 23
+    handSeconds: 0.62
+    driftMinSpeed: 15
+    driftCurvature: 0.022
+    attackDistance: 34
+    reverseSeconds: 1.15
+    stuckSeconds: 1.15
+    liveries:
+    - title: "\u539F\u5382\u7EEF\u7EA2"
+      paint: {r: 0.7372549, g: 0.101960786, b: 0.16862746, a: 1}
+      accent: {r: 1, g: 1, b: 1, a: 1}
+    - title: "\u971C\u767D\u975B\u84DD"
+      paint: {r: 0.92941177, g: 0.9098039, b: 0.84705883, a: 1}
+      accent: {r: 0.11764706, g: 0.23137255, b: 0.4509804, a: 1}
+    - title: "\u77F3\u58A8\u7194\u6A59"
+      paint: {r: 0.21176471, g: 0.23137255, b: 0.25882354, a: 1}
+      accent: {r: 0.98039216, g: 0.40392157, b: 0.11764706, a: 1}
+    - title: "\u5B54\u96C0\u9752\u91D1"
+      paint: {r: 0.050980393, g: 0.56078434, b: 0.5254902, a: 1}
+      accent: {r: 0.972549, g: 0.8117647, b: 0.34117648, a: 1}
+  defaultTrackTitle: "\u5C71\u810A\u5927\u5956\u8D5B\u9053"
   entries:
-  - {fileID: 7058764576122907330, guid: 1036687cb62906540a66492d2b2720e0, type: 3}
-  - {fileID: 5588974766729852696, guid: 059d56d18f5cd7445829e27075bdfeba, type: 3}
   - {fileID: 4485311435469531924, guid: 64371a8bdcabe8a46924f7c9fe8b58c0, type: 3}
+  - {fileID: 230601668942117041, guid: e71eb984c202d0b46b027a2c9e26f235, type: 3}
   panel: {fileID: 1119533321}
-  motionBlurByKph:
+  speedEffectsByKph:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 85
+      time: 35
       value: 0
       inSlope: 0
       outSlope: 0
@@ -434,8 +458,44 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 210
-      value: 0.58
+      time: 80
+      value: 0.27
+      inSlope: 0.007
+      outSlope: 0.007
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 120
+      value: 0.55
+      inSlope: 0.0058
+      outSlope: 0.0058
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 180
+      value: 0.78
+      inSlope: 0.0026
+      outSlope: 0.0026
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 260
+      value: 0.92
+      inSlope: 0.0011
+      outSlope: 0.0011
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 360
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -445,7 +505,37 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  speedFovGain: 24
+  speedViewResponseSeconds: 0.18
   motionBlurProfile: {fileID: 11400000, guid: 8eeff9792f1d0f6478b82d75f87bd16d, type: 2}
+  airflowMaterial: {fileID: 2100000, guid: b0e3d9ded95f87048a08fb4a230dc1e8, type: 2}
+  airflowByKph:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 90
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 180
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  airflowOffset: {x: -0.25, y: 0.92}
+  airflowLifetime: 0.13
+  airflowWidth: 0.11
   sounds: {fileID: 11400000, guid: 0afcf8ea31c68ac45aa056c074df3e44, type: 2}
   tyreMarkPrefab: {fileID: 202207939275994914, guid: 10e6afb9c0cb65342bf585072ca3ea66, type: 3}
   showDriveMonitor: 0

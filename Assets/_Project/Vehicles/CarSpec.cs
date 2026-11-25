@@ -5,6 +5,11 @@ namespace Apex {
 public class CarSpec : ScriptableObject {
     public string displayName = "AS / R01";
     public GameObject body;
+    public bool frontWheelDrive;
+    public string factoryRaceNumber;
+    public string factoryLiveryTitle;
+    public Material factoryPaint;
+    public Color FactoryColor => factoryPaint ? factoryPaint.color : Color.white;
     public CompetitionSetup competition;
     [Header("Chassis (m, kg)")]
     public float mass=1350, wheelbase=2.6f, track=1.56f, radius=.32f, centerHeight=.32f;

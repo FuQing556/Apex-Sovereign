@@ -12,7 +12,7 @@ public sealed class SessionPanel : MonoBehaviour {
     public Button openWorkshop,closeWorkshop,chooseAxle,chooseWheels,previousPart,nextPart,installPart,blurToggle;
     public Text partCar,partName,partNumbers,partInfo,fittedName,installLabel,blurLabel;
     const string BlurKey="Apex.SpeedMotionBlur";
-    public bool BlurEnabled {get;private set;}
+    public bool SpeedEffectsEnabled {get;private set;}
     public GameObject settings;
     public Button openSettings,backFromSettings,toggleAdvanced;
     public Text advancedLabel,advancedKeys;
@@ -22,6 +22,9 @@ public sealed class SessionPanel : MonoBehaviour {
     public bool KeyboardRecovery {get;private set;}
     public Button cycleVolume;
     public Text volumeLabel;
+    public Button toggleMapView;
+    public Text mapViewLabel,mapOrientation;
+    const string MapViewKey="Apex.Minimap.Follow";
     const string VolumeKey="Apex.SfxVolumePercent";
     int volumePercent;
     const string ControlsKey="Apex.AdvancedDrivingControls";
@@ -31,6 +34,9 @@ public sealed class SessionPanel : MonoBehaviour {
     public Material ghostMaterial;
     public Image[] keyCaps;
     int lastKeys=-1;
+    Button gridMode,liveryButton,gridRules;
+    Text modeChoice,liveryChoice,rulesChoice,standings;
+    GameObject timeCaption,bestCaption;
     public Text carName,carData,location,garageKeys,launchLabel;
     public Text mapTitle,mapKey,mode,sessionTitle,sessionData,lapData;
     public Text speed,gear,rpm,rpmLabel,driveStatus,signal,signalCaption,advice,driveKeys,diagnostics;
@@ -43,6 +49,16 @@ public sealed class SessionPanel : MonoBehaviour {
     public Button primary => results.activeSelf?retry:launch;
     public Button secondary => results.activeSelf?returnFromResults:garage.activeSelf?changeCar:leave;
     public void Connect(RaceSession session){
+        changeCar.gameObject.SetActive(session.entries.Length>1);
+        gridMode=GarageButton("比赛模式",session.ToggleGrid,out modeChoice);
+        gridRules=GarageButton("四车赛抽选规则",session.ToggleGridRules,out rulesChoice);
+        liveryButton=GarageButton("选择车衣",session.NextLivery,out liveryChoice);
+        var card=resultTitle.transform.parent;
+        timeCaption=card.Find("总用时标签").gameObject;bestCaption=card.Find("最快圈标签").gameObject;
+        standings=Instantiate(resultTime,card);
+        standings.name="竞速排名";standings.fontSize=21;standings.alignment=TextAnchor.MiddleLeft;
+        standings.rectTransform.pivot=new Vector2(0,1);standings.rectTransform.anchoredPosition=new Vector2(25,-88);
+        standings.rectTransform.sizeDelta=new Vector2(390,152);standings.gameObject.SetActive(false);
         if(openWorkshop){
             openWorkshop.onClick.AddListener(()=>{session.OpenWorkshop();Select(chooseAxle);});
             closeWorkshop.onClick.AddListener(()=>{session.CloseWorkshop();Select(openWorkshop);});
@@ -51,11 +67,11 @@ public sealed class SessionPanel : MonoBehaviour {
             previousPart.onClick.AddListener(()=>session.BrowsePart(-1));nextPart.onClick.AddListener(()=>session.BrowsePart(1));
             installPart.onClick.AddListener(()=>{session.InstallPart();Select(nextPart);});
         }
-        BlurEnabled=PlayerPrefs.GetInt(BlurKey,1)!=0;
+        SpeedEffectsEnabled=PlayerPrefs.GetInt(BlurKey,1)!=0;
         if(blurToggle){
             RefreshBlur();
             blurToggle.onClick.AddListener(()=>{
-                BlurEnabled=!BlurEnabled;PlayerPrefs.SetInt(BlurKey,BlurEnabled?1:0);PlayerPrefs.Save();RefreshBlur();
+                SpeedEffectsEnabled=!SpeedEffectsEnabled;PlayerPrefs.SetInt(BlurKey,SpeedEffectsEnabled?1:0);PlayerPrefs.Save();RefreshBlur();
             });
         }
         launch.onClick.AddListener(session.Primary);retry.onClick.AddListener(session.Primary);
@@ -70,6 +86,11 @@ public sealed class SessionPanel : MonoBehaviour {
         });
         volumePercent=Mathf.Clamp(PlayerPrefs.GetInt(VolumeKey,75),0,100);
         ApplyVolume();
+        SetMapView(PlayerPrefs.GetInt(MapViewKey,1)!=0);
+        toggleMapView.onClick.AddListener(()=>{
+            SetMapView(!map.FollowCar);
+            PlayerPrefs.SetInt(MapViewKey,map.FollowCar?1:0);PlayerPrefs.Save();
+        });
         cycleVolume.onClick.AddListener(()=>{
             volumePercent=volumePercent==0?100:Mathf.Max(0,volumePercent-25);
             ApplyVolume();PlayerPrefs.SetInt(VolumeKey,volumePercent);PlayerPrefs.Save();
@@ -82,12 +103,70 @@ public sealed class SessionPanel : MonoBehaviour {
         backFromSettings.onClick.AddListener(()=>{Show(garage);Select(openSettings);});
         FitScreen();
     }
+    Button GarageButton(string title,UnityEngine.Events.UnityAction action,out Text label){
+        var b=Instantiate(track,garageCard);b.name=title;
+        b.onClick=new Button.ButtonClickedEvent();b.onClick.AddListener(action);
+        label=b.GetComponentInChildren<Text>();label.fontSize=15;return b;
+    }
+    public void GridGarage(bool supportsSkin,bool grid,bool pure,GridLivery skin){
+        liveryButton.gameObject.SetActive(supportsSkin);
+        gridRules.gameObject.SetActive(grid);
+        liveryButton.interactable=!grid || pure;
+        bool ghostRow=replays.open.gameObject.activeSelf;
+        float y=ghostRow?-368:-324;
+        void Place(Button b,float x,float width){
+            var r=(RectTransform)b.transform;r.anchoredPosition=new Vector2(x,y);r.sizeDelta=new Vector2(width,36);
+        }
+        if(changeCar.gameObject.activeSelf){
+            Place(gridMode,20,supportsSkin?148:314);Place(liveryButton,178,156);
+        }else{
+            var slot=(RectTransform)changeCar.transform;
+            var button=(RectTransform)liveryButton.transform;
+            button.anchoredPosition=slot.anchoredPosition;button.sizeDelta=slot.sizeDelta;
+            Place(gridMode,20,314);
+        }
+        if(grid){
+            y-=44;Place(gridRules,20,314);
+            rulesChoice.text=pure?"车辆规则 · 纯净":"车辆规则 · 全随机";
+            garageKeys.text="本车装配　"+garageKeys.text;
+            carData.text=pure?"全场同车型 · 仅对手随机配件":"车型随机 · 玩家沿用抽中车型的装配";
+        }
+        garageCard.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical,(ghostRow?492:448)+(grid?44:0));
+        modeChoice.text=grid?"模式 · 四车竞速":"模式 · 计时赛";
+        liveryChoice.text=grid && !pure?"车衣 · 随机":"车衣 · "+skin.title;
+        if(grid)launchLabel.text="开始四车竞速";
+    }
+    public void GridHud(GridRace race,float elapsed){
+        var e=race.Watching;bool spectator=race.Player.Finished;
+        mode.text=spectator?"观战　"+e.Name:"四车竞速 · "+e.car.spec.displayName;
+        sessionTitle.text=float.IsInfinity(race.Deadline)?Clock(elapsed):$"收车　{Mathf.Max(0,race.Deadline-elapsed):F1} 秒";
+        sessionData.text=$"第 {System.Array.IndexOf(race.order,e)+1} / 4 名　　 第 {race.Lap(e)} / {race.course.laps} 圈";
+        var o=race.order;
+        lapData.text=$"1　{o[0].Name}　　 2　{o[1].Name}\n3　{o[2].Name}　　 4　{o[3].Name}";
+        mapKey.text=spectator?"箭头 自车　圆点 对手（观战中）":"描边箭头 自车　圆点 对手";
+        if(spectator)driveKeys.text="冲线后观战";
+    }
+    void ResultLayout(bool grid){
+        timeCaption.SetActive(!grid);bestCaption.SetActive(!grid);resultTime.gameObject.SetActive(!grid);
+        resultBest.gameObject.SetActive(!grid);standings.gameObject.SetActive(grid);
+    }
+    public void GridFinish(GridRace race){
+        Show(results);replays.Decided();ResultLayout(true);
+        resultTitle.text=$"四车竞速　你排第 {System.Array.IndexOf(race.order,race.Player)+1}";
+        var rows=new string[race.order.Length];
+        for(int i=0;i<rows.Length;i++){
+            var e=race.order[i];string time=e.Finished?Clock(e.finish):$"未完赛 · 第{race.Lap(e)}圈";
+            rows[i]=$"{i+1}　{e.Name}　　 {time}";
+        }
+        standings.text=string.Join("\n",rows);Select(retry);
+    }
     static void Select(Button button){
         if(EventSystem.current)EventSystem.current.SetSelectedGameObject(button.gameObject);
     }
-    void RefreshBlur()=>blurLabel.text="高速动态模糊　"+(BlurEnabled?"开启":"关闭");
+    void RefreshBlur()=>blurLabel.text="广角、动态模糊与气流　"+(SpeedEffectsEnabled?"开启":"关闭");
     public void ShowPart(CarSpec spec,bool axle,WorkshopCatalog.Part part,WorkshopCatalog.Part fitted,int index,int total){
         Show(workshop);partCar.text=spec.displayName;partName.text=part.title;
+        chooseAxle.GetComponentInChildren<Text>().text=spec.frontWheelDrive?"前桥差速器":"后桥差速器";
         partNumbers.text=(index+1).ToString("00")+"  /  "+total.ToString("00");
         partInfo.text=part.description;fittedName.text="车上已装　"+fitted.title;
         chooseAxle.targetGraphic.color=axle?new Color(.20f,.42f,.39f):new Color(.13f,.20f,.23f);
@@ -97,6 +176,12 @@ public sealed class SessionPanel : MonoBehaviour {
     void ApplyVolume(){
         AudioListener.volume=volumePercent*.01f;
         volumeLabel.text=volumePercent==0?"音效音量　静音":"音效音量　"+volumePercent+"%";
+    }
+    void SetMapView(bool follow){
+        map.SetFollow(follow);
+        mapTitle.rectTransform.parent.localScale=Vector3.one*(follow?1.14f:1f);
+        mapViewLabel.text=follow?"小地图　跟车 · 车头向上":"小地图　全图 · 北向上";
+        mapOrientation.text=follow?"车头向上":"北向上";
     }
     void UpdateControls(){
         if(recoveryLabel)recoveryLabel.text=KeyboardRecovery?"键盘纠偏辅助　已开启":"键盘纠偏辅助　已关闭";
@@ -138,24 +223,25 @@ public sealed class SessionPanel : MonoBehaviour {
     }
     public void BindOpponent(RaceGhost opponent){
         map.Ghost=opponent;
-        if(opponent)mapKey.text="白色 自车　彩色 "+opponent.Recording.title;
+        if(opponent)mapKey.text="箭头 自车　圆点 "+opponent.Recording.title;
     }
-    public void Garage(CarSpec spec,string course,bool free,bool school){
+    public void Garage(CarSpec spec,string course){
         bool entering=!garage.activeSelf;
         Show(garage);
         if(entering && EventSystem.current)EventSystem.current.SetSelectedGameObject(launch.gameObject);
         carName.text=spec.displayName;
-        carData.text=spec.competition?"后轮驱动　/　奥伊吹 2024 · 估算动力曲线":"后轮驱动　/　原型赛车 · 漂移短喷";
+        carData.text=spec.frontWheelDrive?"前轮驱动　/　株洲 2024 · 2.0T 六速序列":
+            spec.competition?"后轮驱动　/　奥伊吹 2024 · 估算动力曲线":"后轮驱动　/　原型赛车 · 漂移短喷";
         location.text=course;
         garageKeys.text="W 给油　 S 刹车／倒车　 A / D 转向\n空格 手刹"+(spec.competition?"":"　 漂移出弯自动短喷");
-        launchLabel.text=school?"进入训练":free?"开始试车":"开始计时赛";
+        launchLabel.text="开始计时赛";
     }
-    public void Drive(RaceCar car,Circuit c,DrivingSchool school,RoadLayout layout,string name,bool free){
-        map.Bind(car,c,school,layout);mapTitle.text=name;
+    public void Drive(RaceCar car,Circuit c,RoadLayout layout,string name,Color paint){
+        map.Bind(car,c,layout,paint);mapTitle.text=name;
         tyreTemperatures.Bind(car);
-        mapKey.text=school?"车头箭头　◇ 目标门":free?"车头箭头　◇ 起点":"车头箭头　◇ 下一计时门";
-        mode.text=school?"驾驶训练":free?"自由驾驶":"计时赛";
-        driveKeys.text=school?"T 课程　 C 教练　 退格复位":"W 给油　S 刹车／倒车\nA / D 转向　空格 手刹";
+        mapKey.text="箭头 自车　◇ 下一计时门";
+        mode.text="计时赛";
+        driveKeys.text="W 给油　S 刹车／倒车\nA / D 转向　空格 手刹";
         Show(hud);startSignal.SetActive(false);coach.SetActive(false);monitor.SetActive(false);
     }
     public void Countdown(int seconds){
@@ -168,7 +254,7 @@ public sealed class SessionPanel : MonoBehaviour {
         int cs=Mathf.RoundToInt(value*100);
         return $"{cs/6000:00}:{cs/100%60:00}.{cs%100:00}";
     }
-    public void Instruments(RaceCar car,Circuit circuit,DrivingSchool school,bool free,int lap,int next,
+    public void Instruments(RaceCar car,Circuit circuit,int lap,int next,
         float elapsed,float lapStart,float last,float best,bool showMonitor){
         map.SetGate(next);
         tyreTemperatures.Refresh(car);
@@ -181,20 +267,9 @@ public sealed class SessionPanel : MonoBehaviour {
         revFill.rectTransform.anchorMax=new Vector2(Mathf.Clamp01(fraction),1);revFill.color=fraction>.92f?new Color(1,.38f,.27f):new Color(.32f,.86f,.72f);
         driveStatus.text=car.BoostRemaining>0?$"短喷　{car.BoostRemaining:F1} 秒":
             $"{(car.ManualGears?"手动":"自动")} · 侧滑 {car.SignedDriftAngle:+0;-0;0}°";
-        if(school){
-            sessionTitle.text=school.LessonName;
-            sessionData.text=school.Progress;
-            lapData.text=school.LastResult.Length>0?school.LastResult:school.Rival?school.Chase:"已完成　"+school.Completed+" 圈";
-            if(school.Rival && school.LastResult.Length>0)sessionData.text+="\n"+school.Chase;
-            mapKey.text=school.Rival?"◇ 目标门　绿色为陪练车":"车头箭头　◇ 目标门";
-            driveKeys.text=school.Rival?"T 课程　C 教练　Y 风格\nF7 遥测　F8 标记　退格复位":"T 课程　C 教练　退格复位\nF7 遥测　F8 标记";
-            coach.SetActive(school.Coach);
-            if(school.Coach)advice.text=school.Advice();
-        }else{
-            sessionTitle.text=Clock(free?elapsed:elapsed-lapStart);
-            sessionData.text=free?$"接地车轮　{car.GroundedCount} / 4":$"圈数　{lap} / {circuit.laps}　　计时门　{next+1} / {circuit.gates.Length}";
-            lapData.text=free?$"距起点　{Vector3.Distance(circuit.grid.position,car.Chassis.position):F0} 米":$"上一圈　{(last>0?Clock(last):"—")}\n最快圈　{Clock(best)}";
-        }
+        sessionTitle.text=Clock(elapsed-lapStart);
+        sessionData.text=$"圈数　{lap} / {circuit.laps}　　计时门　{next+1} / {circuit.gates.Length}";
+        lapData.text=$"上一圈　{(last>0?Clock(last):"—")}\n最快圈　{Clock(best)}";
         monitor.SetActive(showMonitor);
         if(!showMonitor)return;
         var input=car.AppliedInput;var cmd=car.AppliedCommand;
@@ -206,7 +281,7 @@ public sealed class SessionPanel : MonoBehaviour {
         diagnostics.text+=$"\n左/右　前 {TyreSurface.Label(car.WheelCover(0))}/{TyreSurface.Label(car.WheelCover(1))}　后 {TyreSurface.Label(car.WheelCover(2))}/{TyreSurface.Label(car.WheelCover(3))}";
     }
     public void Finish(float elapsed,float best,bool practice){
-        Show(results);replays.Decided();resultTitle.text=practice?"练习完赛":"计时赛完赛";
+        Show(results);replays.Decided();ResultLayout(false);resultTitle.text=practice?"练习完赛":"计时赛完赛";
         resultTime.text=Clock(elapsed);resultBest.text=Clock(best);
         if(EventSystem.current)EventSystem.current.SetSelectedGameObject(retry.gameObject);
     }

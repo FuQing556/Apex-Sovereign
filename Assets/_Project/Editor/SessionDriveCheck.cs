@@ -195,7 +195,7 @@ public static class SessionDriveCheck {
         }
         var s=Object.FindAnyObjectByType<RaceSession>();
         if(!s)return;
-        if(step==0 && s.State==RaceSession.Phase.Lobby){s.panel.secondary.onClick.Invoke();s.panel.primary.onClick.Invoke();step++;Time.timeScale=3;}
+        if(step==0 && s.State==RaceSession.Phase.Lobby){s.panel.primary.onClick.Invoke();step++;Time.timeScale=3;}
         else if(step==1 && s.State==RaceSession.Phase.Driving){driven=s.Car;driven.Driver=new CircuitDriver(driven,Object.FindAnyObjectByType<Circuit>());step++;}
         else if(step==2 && s.State==RaceSession.Phase.Results){Debug.Log("Apex finish: "+s.panel.resultTime.text);s.panel.primary.onClick.Invoke();step++;}
         else if(step==3 && s.State==RaceSession.Phase.Driving){s.panel.secondary.onClick.Invoke();step++;}

@@ -20,6 +20,7 @@ public sealed class WorkshopCatalog : ScriptableObject {
         int match=Array.FindIndex(options,p=>p.id==id);
         return Mathf.Max(0,match);
     }
+    public Part InstalledPart(CarSpec car,bool axle)=>Options(axle)[Installed(car,axle)];
     public void Install(CarSpec car,bool axle,int index){
         PlayerPrefs.SetString(Key(car,axle),Options(axle)[index].id);
         PlayerPrefs.Save();

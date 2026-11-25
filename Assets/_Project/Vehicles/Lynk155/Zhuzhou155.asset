@@ -1,0 +1,219 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cfec24789d785145908b9948bd04cdf, type: 3}
+  m_Name: Zhuzhou155
+  m_EditorClassIdentifier: Assembly-CSharp::Apex.CarSpec
+  displayName: "\u9886\u514B 03 FL TCR \xB7 155"
+  body: {fileID: 7267139330448570612, guid: bf47a6a6dd409494baf7d75635732612, type: 3}
+  frontWheelDrive: 1
+  factoryRaceNumber: 155
+  factoryLiveryTitle: 株洲原厂
+  factoryPaint: {fileID: 2100000, guid: bda2fdbbb91f3cc4d93f615c3af7292b, type: 2}
+  competition: {fileID: 11400000, guid: 9a67ad1ac2805da41b42663441d123cc, type: 2}
+  mass: 1265
+  wheelbase: 2.76
+  track: 1.658
+  radius: 0.33
+  centerHeight: 0.32
+  rearRadius: 0.33
+  visualTyreWidths: {x: 0.26, y: 0.26}
+  frontWeight: 0.6
+  steeringBySpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 32
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 22
+      value: 21
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 50
+      value: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 72
+      value: 8
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  steerRate: 9
+  returnRate: 12
+  countersteerRate: 22
+  directionThreshold: 0.18
+  reverseLimit: 9
+  pedalRise: 3
+  pedalRelease: 5
+  coastTorque: 36
+  longitudinalGrip: 1.45
+  lateralGrip: 1.28
+  gripSlipAllowance: 7
+  driftSlipAllowance: 14
+  slipSteerGain: 2.5
+  yawPreview: 0.22
+  slidingGripFraction: 0.92
+  roadSpeedAutomaticShifts: 1
+  enginePowerMap: {fileID: 0}
+  engineNm:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1000
+      value: 125
+      inSlope: 0
+      outSlope: 0.14166667
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 2200
+      value: 295
+      inSlope: 0.14166667
+      outSlope: 0.11363637
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 3300
+      value: 420
+      inSlope: 0.11363637
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 5000
+      value: 420
+      inSlope: -0
+      outSlope: -0.013333334
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 5750
+      value: 410
+      inSlope: -0.013333334
+      outSlope: -0.047272727
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 6300
+      value: 384
+      inSlope: -0.047272727
+      outSlope: -0.085
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 6700
+      value: 350
+      inSlope: -0.085
+      outSlope: -0.16666667
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 7000
+      value: 300
+      inSlope: -0.16666667
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gears:
+  - 3
+  - 2.15
+  - 1.68
+  - 1.38
+  - 1.17
+  - 1
+  poweredTopKph: 370
+  limiterBandKph: 12
+  finalDrive: 3.7
+  efficiency: 0.9
+  upshift: 6600
+  downshift: 3300
+  idle: 1000
+  differentialGain: 1
+  differentialLimit: 130
+  handbrakeCutsDrive: 0
+  brakeNm: 4400
+  handbrakeNm: 2500
+  handRamp: 20
+  boostGain: 0
+  boostRamp: 4
+  poweredDrift: 0
+  driftBrakePulse: 0.18
+  driftRearGrip: 0.92
+  driftWheelSlipTarget: 0.22
+  driftWheelSlipBand: 0.45
+  driftGripRecoveryAngle: 22
+  driftBlendRate: 4
+  driftMinSpeed: 7
+  driftEntryAngle: 7.5
+  driftExitAngle: 6
+  driftSpinAngle: 50
+  driftMinYaw: 8
+  driftMinSeconds: 0.24
+  driftFullSeconds: 1.1
+  driftExitWindow: 1.1
+  driftBoostMin: 0.5
+  driftBoostMax: 1.1
+  exhaustTip: {x: 0.6, y: 0.47, z: -2.08}
+  flameLength: 1.05
+  flameWidth: 0.24
+  brakeFront: 0.65
+  frontSpring: 74000
+  rearSpring: 56000
+  damper: 4000
+  travel: 0.13
+  wheelMass: 22
+  tireStiffness: 200000
+  maxFlatten: 0.04
+  cameraOffset: {x: 0, y: 3.4, z: -7}
+  lookAhead: 4
+  cameraResponse: 14

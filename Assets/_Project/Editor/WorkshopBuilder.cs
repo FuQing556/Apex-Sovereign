@@ -185,16 +185,15 @@ public static class WorkshopBuilder {
         if(!catalog){
             catalog=ScriptableObject.CreateInstance<WorkshopCatalog>();
             catalog.differentials=new[]{
-                new WorkshopCatalog.Part{id="original",title="基准限滑",transferFraction=1,displayModel=stock,description="沿用本车的限滑设定。两后轮有转速差时，差速器把部分扭矩传给较慢的一侧。"},
+                new WorkshopCatalog.Part{id="original",title="基准限滑",transferFraction=1,displayModel=stock,description="沿用本车的限滑设定。驱动轮有转速差时，差速器把部分扭矩传给较慢的一侧。"},
                 new WorkshopCatalog.Part{id="club-lsd",title="柔性限滑",transferFraction=.5f,displayModel=soft,description="项目试制件。左右轮扭矩转移量为基准的 50%，允许更大的轮速差。"},
-                new WorkshopCatalog.Part{id="open",title="开放式差速器",transferFraction=0,displayModel=open,description="左右后轮各分一半驱动扭矩，仍可不同速转动。单轮压草时，低抓地侧容易空转。"}};
+                new WorkshopCatalog.Part{id="open",title="开放式差速器",transferFraction=0,displayModel=open,description="左右驱动轮各分一半扭矩，可不同速转动。单轮压草时，低抓地侧容易空转。"}};
             catalog.wheels=new[]{
                 new WorkshopCatalog.Part{id="original",title="原车轮面",description="保留原有轮辐与制动盘外观。"},
                 new WorkshopCatalog.Part{id="vent-disc",title="通风气动盘",rearWheelCover=disc,description="项目原创后轮盘面，十二组径向开口、金属外圈和红色定位标记。此件仅改变外观。"}};
             AssetDatabase.CreateAsset(catalog,Dir+"Workshop.asset");
         }
-        foreach(var id in new[]{"Lagoon","Porcelain","SHIBATA31/Okuibuki"})
-            foreach(var type in new[]{"Car","Visual"})FitSockets(Vehicles+id+type+".prefab",id.Contains("/"));
+        foreach(var type in new[]{"Car","Visual"})FitSockets(Vehicles+"SHIBATA31/Okuibuki"+type+".prefab",true);
         const string ui="Assets/_Project/UI/SessionPanel.prefab";
         var panelRoot=PrefabUtility.LoadPrefabContents(ui);
         try{SessionPanelBuilder.AddWorkshop(panelRoot.GetComponent<SessionPanel>());PrefabUtility.SaveAsPrefabAsset(panelRoot,ui);}

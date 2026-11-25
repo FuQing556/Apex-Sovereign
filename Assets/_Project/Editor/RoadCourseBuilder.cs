@@ -74,17 +74,15 @@ public static class RoadCourseBuilder {
         if(EditorApplication.isPlaying || SceneManager.GetActiveScene().isDirty)throw new System.InvalidOperationException("Save scene edits before baking.");
         Directory.CreateDirectory(Dir);AssetDatabase.Refresh();
         var ridge=Layout("Ridge","山脊大奖赛道",new[]{P(0,2,0),P(0,2,75),P(30,6,120),P(85,12,125),P(110,16,90),P(80,13,57),P(97,8,27),P(151,5,23),P(178,4,-10),P(151,4,-40),P(89,6,-43),P(51,10,-79),P(76,14,-120),P(38,7,-158),P(-30,2,-150),P(-57,2,-99),P(-18,2,-62)});
-        var mesa=Layout("Mesa","台地回头弯",new[]{P(0,2,0),P(0,2,65),P(0,7,95),P(0,10,110),P(0,7,130),P(-30,4,167),P(-94,3,154),P(-110,6,108),P(-65,9,86),P(-53,12,54),P(-96,14,30),P(-155,10,39),P(-185,7,-4),P(-150,4,-48),P(-98,3,-41),P(-65,3,-78),P(-83,4,-125),P(-48,4,-151),P(-8,2,-111)});
-        Bake("Ridge",ridge);Bake("Mesa",mesa);
+        Bake("Ridge",ridge);
         var scene=EditorSceneManager.OpenScene(Root+"Scenes/Bootstrap.unity");
-        var s=Object.FindAnyObjectByType<RaceSession>();s.tracks=new[]{
-            new RaceSession.TrackChoice{title=ridge.title,scene="Ridge",layout=ridge},new RaceSession.TrackChoice{title=mesa.title,scene="Mesa",layout=mesa},
-            new RaceSession.TrackChoice{title="钴蓝椭圆赛道",scene="Circuit"},
-            new RaceSession.TrackChoice{title="开放试车场",scene="TestPad",freeDrive=true},
-            new RaceSession.TrackChoice{title="驾驶训练场",scene="DrivingSchool",freeDrive=true}};
+        var s=Object.FindAnyObjectByType<RaceSession>();
+        var otherTracks=(s.tracks??System.Array.Empty<RaceSession.TrackChoice>()).Where(t=>t!=null && t.scene!="Ridge");
+        s.tracks=new[]{new RaceSession.TrackChoice{title=ridge.title,scene="Ridge",layout=ridge}}.Concat(otherTracks).ToArray();
         EditorSceneManager.MarkSceneDirty(scene);EditorSceneManager.SaveScene(scene);
         var builds=EditorBuildSettings.scenes.ToList();
-        foreach(string id in new[]{"Ridge","Mesa"}){string file=Root+"Scenes/"+id+".unity";if(!builds.Any(x=>x.path==file))builds.Add(new EditorBuildSettingsScene(file,true));}
+        string file=Root+"Scenes/Ridge.unity";
+        if(!builds.Any(x=>x.path==file))builds.Add(new EditorBuildSettingsScene(file,true));
         EditorBuildSettings.scenes=builds.ToArray();AssetDatabase.SaveAssets();
     }
 }

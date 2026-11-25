@@ -65,6 +65,13 @@ namespace Apex.Editor {
             }
             importer.SaveAndReimport();
         }
+        [MenuItem("Apex/Art/Import Zhuzhou 155 model")]
+        public static void ImportZhuzhou155(){
+            ImportModel("Assets/_Project/Vehicles/Lynk155/Lynk155.fbx",
+                "毕设资料/02-车辆设计/领克155/surfaces.json",false);
+            AssetDatabase.SaveAssets();
+        }
+
         static void Clear(Transform t){
             for(int i=t.childCount-1;i>=0;i--)Object.DestroyImmediate(t.GetChild(i).gameObject);
         }
@@ -152,6 +159,7 @@ namespace Apex.Editor {
             var art=(GameObject)PrefabUtility.InstantiatePrefab(Load<GameObject>(MapModel),scene);
             art.name="山谷围场";art.transform.SetParent(course.transform,false);
             art.transform.localRotation=Quaternion.Euler(0,180,0);
+            RoadsideDetailBuilder.HideOldBoards(art.transform);
             var road=course.transform.Find("Road and kerbs");
             var src=Load<Mesh>("Assets/_Project/Tracks/RidgeSurface.asset");
             string path=MapDir+"Ridge surface UV.asset";var surf=Load<Mesh>(path);
